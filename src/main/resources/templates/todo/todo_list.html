@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{items.todo.list.ja}"></title>
+	<!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+	
+	<!-- カスタム CSS・JS -->
+	<link th:href="@{/css/todo_list.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="todo-card">
+	    <div class="todo-header">
+	        <h4 th:text="#{items.todo.list.ja}"></h4>
+	        <a th:href="@{/todo/create}" class="btn btn-primary btn-sm">
+	            <i th:text="#{btn.add.ja}" class="fas fa-plus-circle"></i> 
+	        </a>
+	    </div>
+
+		<form th:action="@{/todo/search}" method="get">
+			<!-- フィルター -->
+			<div class="filter-row">
+			    <input type="text" name="title" class="form-control form-control-sm" style="max-width: 350px;" placeholder="検索">
+				<select name="status" class="form-select form-select-sm" style="max-width: 150px;">
+					<option value="">ステータス</option>
+				    <option th:each="status : ${statuses}" 
+				            th:value="${status.name}" 
+				            th:text="${status.name}"></option>
+				</select>
+				<select name="category" class="form-select form-select-sm" style="max-width: 150px;">
+					<option value="">カテゴリー</option>
+				    <option th:each="category : ${categories}" 
+				            th:value="${category.name}" 
+				            th:text="${category.name}"></option>
+				</select>
+				
+				<button th:text="#{btn.search.ja}" type="submit" class="btn btn-primary btn-sm"></button>
+			</div>
+
+		    
+		</form>
+
+	    <!-- ToDo一覧 -->
+	    <table class="table table-bordered table-hover todo-table">
+	        <thead class="table-light">
+	        <tr>
+	            <th th:text="#{items.todo.en}" style="width: 50%;"></th>
+	            <th th:text="#{items.status.ja}"></th>
+	            <th th:text="#{items.category.ja}"></th>
+	            <th style="width: 200px;"></th>
+	        </tr>
+	        </thead>
+			<tbody th:each="todo : ${todos}">
+			    <tr>
+			        <td>
+			            <div class="todo-title" th:text="${todo.title}"></div>
+			            <div class="todo-description" th:text="${todo.description}"></div>
+			        </td>
+			        <td>
+						<span th:switch="${todo.statusName}">
+						    <span th:case="'未処理'" class="status-badge bg-secondary text-white" th:text="${todo.statusName}"></span>
+						    <span th:case="'処理中'" class="status-badge bg-primary text-white" th:text="${todo.statusName}"></span>
+						    <span th:case="'処理済'" class="status-badge bg-success text-white" th:text="${todo.statusName}"></span>
+						    <span th:case="*"
+						          class="badge bg-light text-dark"
+						          th:text="${todo.statusName}"></span>
+						</span>
+			        </td>
+			        <td>
+						<span th:switch="${todo.categoryName}">
+						    <span th:case="'マーケティング'" class="category-badge bg-primary text-white" th:text="${todo.categoryName}"></span>
+						    <span th:case="'商品登録'" class="category-badge bg-secondary text-white" th:text="${todo.categoryName}"></span>
+						    <span th:case="'調達'" class="category-badge bg-success text-white" th:text="${todo.categoryName}"></span>
+							<span th:case="'開発'" class="category-badge bg-danger text-white" th:text="${todo.categoryName}"></span>
+							<span th:case="'営業'" class="category-badge bg-warning text-white" th:text="${todo.categoryName}"></span>
+							<span th:case="'経理'" class="category-badge bg-info text-white" th:text="${todo.categoryName}"></span>
+							<span th:case="'社内連絡'" class="category-badge bg-dark text-white" th:text="${todo.categoryName}"></span>
+							<span th:case="'その他'" class="category-badge bg-light text-dark" th:text="${todo.categoryName}"></span>
+						</span>
+						
+			        </td>
+					<td class="action-buttons d-flex justify-content-start gap-1">
+					    <form th:action="@{/todo/toggleStatus/{id}(id=${todo.id})}" method="post" th:object="${todo}" style="display: inline;">
+					        <button type="submit" class="btn btn-outline-dark btn-sm">
+					            <i class="fas" th:classappend="${todo.statusName != '処理済'} ? 'fa-check-circle' : 'fa-undo'"></i>
+					        </button>
+					    </form>
+						<a th:href="@{/todo/edit/{id}(id=${todo.id})}" class="btn btn-primary btn-sm">
+						   <i class="fas fa-pen"></i> 
+						</a>
+					    <form th:action="@{/todo/delete/{id}(id=${todo.id})}" method="post" style="display: inline;">
+					        <button type="submit" class="btn btn-danger btn-sm">
+					            <i class="fas fa-trash"></i>
+					        </button>
+					    </form>
+					</td>
+			    </tr>
+			</tbody>
+	    </table>
+	</div>
+</body>
+</html>
