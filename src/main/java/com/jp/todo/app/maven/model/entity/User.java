@@ -15,25 +15,25 @@ import lombok.Data;
 @Table(name = "users")
 public class User {
 
+    // ユーザーID（主キー）
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    // ユーザーID（主キー）
     private Integer userId; 
 
-    @Column(name = "name")
     // 氏名
+    @Column(name = "name")
     private String name; 
     
-    @Column(name = "username")
     // ユーザ名
+    @Column(name = "username")
     private String userName; 
 
-    @Column(name = "password")
     // ハッシュ化されたパスワード
+    @Column(name = "password")
     private String password; 
     
-    @Column(name = "created_at")
     // 作成日時
+    @Column(name = "created_at")
     private LocalDateTime createdAt; 
 }
