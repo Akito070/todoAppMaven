@@ -1,0 +1,88 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f6f9fc, #e9f1ff);
+    padding: 2rem;
+}
+
+.todo-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.status-badge {
+    border-radius: 1rem;
+    padding: 0.3em 0.8em;
+    font-size: 0.75rem;
+}
+
+.badge-processing {
+    background-color: #198754;
+    color: #fff;
+}
+
+.badge-pending {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.category-badge {
+    font-size: 0.75rem;
+   /* background-color: #f0f0f0;*/
+    padding: 0.3em 0.6em;
+    border-radius: 1rem;
+    /*color: #333;*/
+}
+
+.filter-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.todo-table th,
+.todo-table td {
+    vertical-align: middle;
+}
+
+.todo-title {
+    font-weight: 600;
+}
+
+.todo-description {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+}
+
+
+.todo-table td {
+    vertical-align: middle;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap; /* 長い要素の折返し防止 */
+}
+.action-buttons button,
+.action-buttons a {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:8px;
+	margin-bottom: 6px;
+}
