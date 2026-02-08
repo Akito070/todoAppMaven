@@ -6,6 +6,6 @@ main<br>
                 └─ users_register<br>
       └─ feature/todo<br>
                 ├─ todo_list<br>
-                ├─ todo-register<br>
+                ├─ todo_register<br>
                 ├─ todo_edit<br>
                 └─ todo_delete<br>
