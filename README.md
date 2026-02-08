@@ -1,9 +1,9 @@
-main
- └─ develop
-      ├─ feature/auth-login
-      ├─ feature/users-register
-      ├─ feature/users-register-fix
-      ├─ feature/todo-list
-      ├─ feature/todo-register
-      ├─ feature/todo-edit
-      └─ feature/todo-delete
+main<br>
+ └─ develop<br>
+      ├─ feature/auth-login<br>
+      ├─ feature/users-register<br>
+      ├─ feature/users-register-fix<br>
+      ├─ feature/todo-list<br>
+      ├─ feature/todo-register<br>
+      ├─ feature/todo-edit<br>
+      └─ feature/todo-delete<br>
