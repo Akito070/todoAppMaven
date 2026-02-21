@@ -15,6 +15,7 @@
 	<div class="todo-card">
 	    <div class="todo-header">
 	        <h4 th:text="#{items.todo.list.ja}"></h4>
+			<!--TODO作成ボタン-->
 	        <a th:href="@{/todo/create}" class="btn btn-primary btn-sm">
 	            <i th:text="#{btn.add.ja}" class="fas fa-plus-circle"></i> 
 	        </a>
@@ -24,23 +25,23 @@
 			<!-- フィルター -->
 			<div class="filter-row">
 			    <input type="text" name="title" class="form-control form-control-sm" style="max-width: 350px;" placeholder="検索">
+				<!--ステータスプルダウン-->
 				<select name="status" class="form-select form-select-sm" style="max-width: 150px;">
-					<option value="">ステータス</option>
+					<option  th:text="#{items.status.ja}"></option>
 				    <option th:each="status : ${statuses}" 
 				            th:value="${status.name}" 
 				            th:text="${status.name}"></option>
 				</select>
+				<!--カテゴリープルダウン-->
 				<select name="category" class="form-select form-select-sm" style="max-width: 150px;">
-					<option value="">カテゴリー</option>
+					<option th:text="#{items.category.ja}"></option>
 				    <option th:each="category : ${categories}" 
 				            th:value="${category.name}" 
 				            th:text="${category.name}"></option>
 				</select>
-				
+				<!--検索ボタン-->	
 				<button th:text="#{btn.search.ja}" type="submit" class="btn btn-primary btn-sm"></button>
 			</div>
-
-		    
 		</form>
 
 	    <!-- ToDo一覧 -->
