@@ -4,8 +4,9 @@ main
         - auth_login
     - feature/users
         - users_register
-    - feature/auth
+    - feature/todo
         - todo_list
+        - todo_search
         - todo_register
         - todo_edit
         - todo_delete
