@@ -45,6 +45,38 @@ public class TodoService {
 	}
 
 	/**
+	 * ToDoリストを検索する。
+	 * 
+	 * @param title    検索対象のタイトル（部分一致）
+	 * @param status   ステータス名（完全一致）
+	 * @param category カテゴリ名（完全一致）
+	 * @return 条件に一致するTODOのDTOリスト
+	 */
+	public List<TodoDto> search(String title, String status, String category) {
+		// 空文字や空白文字列を null に変換し、JPQLの IS NULL 条件に対応させる
+		if (isBlank(title))
+			title = null;
+		if (isBlank(status))
+			status = null;
+		if (isBlank(category))
+			category = null;
+
+		// リポジトリメソッドで条件検索を実行
+		return todoRepository.findByTitleAndStatusAndCategory(title, status, category);
+	}
+
+	/**
+	 * 文字列が null または空白（スペースやタブなど）だけかどうかを判定する。
+	 * 
+	 * @param value チェック対象の文字列
+	 * @return null または空白のみの文字列であれば true、それ以外は false
+	 */
+	private boolean isBlank(String value) {
+		// null または空白のみで構成されていれば true
+		return value == null || value.trim().isEmpty();
+	}
+
+	/**
 	 * TODO登録処理
 	 * 
 	 * @param form TODO登録用フォーム
