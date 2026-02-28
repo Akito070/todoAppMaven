@@ -15,6 +15,7 @@ import com.jp.todo.app.maven.common.Constant;
 import com.jp.todo.app.maven.model.dto.TodoDto;
 import com.jp.todo.app.maven.model.entity.Todo;
 import com.jp.todo.app.maven.model.form.TodoForm;
+import com.jp.todo.app.maven.repository.TodoRepository;
 import com.jp.todo.app.maven.service.CategoryService;
 import com.jp.todo.app.maven.service.StatusService;
 import com.jp.todo.app.maven.service.TodoService;
@@ -27,12 +28,14 @@ public class TodoController {
 	private final CategoryService categoryService;
 	private final StatusService statusService;
 	private final TodoService todoService;
+	private final TodoRepository todoRepository;
 
 	public TodoController(CategoryService categoryService, StatusService statusService,
-			TodoService todoService) {
+			TodoService todoService, TodoRepository todoRepository) {
 		this.categoryService = categoryService;
 		this.statusService = statusService;
 		this.todoService = todoService;
+		this.todoRepository = todoRepository;
 	}
 
 	/**
@@ -173,6 +176,21 @@ public class TodoController {
 		// ステータスを次の状態へ更新
 		todoService.upStatus(todo);
 
+		return "redirect:/todo/todoList";
+	}
+
+	/**
+	 * TODOの削除処理
+	 * 
+	 * @param id TODOリストID
+	 * @return TODO削除
+	 */
+	@PostMapping("/todo/delete/{id}")
+	public String deleteTodos(@PathVariable("id") Integer id) {
+		// 対象のToDo情報を取得
+		Todo todo = todoService.getTodoId(id);
+		todoRepository.delete(todo);
+		// 削除処理
 		return "redirect:/todo/todoList";
 	}
 }
