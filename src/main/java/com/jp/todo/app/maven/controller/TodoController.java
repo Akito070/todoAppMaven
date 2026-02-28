@@ -1,12 +1,16 @@
 package com.jp.todo.app.maven.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jp.todo.app.maven.model.dto.TodoDto;
 import com.jp.todo.app.maven.model.form.TodoForm;
 import com.jp.todo.app.maven.service.CategoryService;
 import com.jp.todo.app.maven.service.StatusService;
@@ -37,6 +41,25 @@ public class TodoController {
 		model.addAttribute("categories", categoryService.getAllCategories());
 		model.addAttribute("statuses", statusService.getAllStatuses());
 		model.addAttribute("todos", todoService.getAllTodos());
+		return "todo/todo_list";
+	}
+
+	/**
+	 * TODOリストを検索する。
+	 * 検索条件（タイトル・ステータス・カテゴリー）に基づいてTODOリストを検索し、
+	 * 一覧画面に表示する。検索結果に加え、プルダウン用のステータス・カテゴリー情報も返します。
+	 */
+	@GetMapping("/todo/search")
+	public String searchTodos(@RequestParam(required = false) String title,
+			@RequestParam(required = false) String status,
+			@RequestParam(required = false) String category,
+			Model model) {
+		// 検索結果を取得
+		List<TodoDto> result = todoService.search(title, status, category);
+
+		model.addAttribute("todos", result);
+		model.addAttribute("categories", categoryService.getAllCategories());
+		model.addAttribute("statuses", statusService.getAllStatuses());
 		return "todo/todo_list";
 	}
 

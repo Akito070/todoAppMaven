@@ -27,14 +27,14 @@
 			    <input type="text" name="title" class="form-control form-control-sm" style="max-width: 350px;" placeholder="検索">
 				<!--ステータスプルダウン-->
 				<select name="status" class="form-select form-select-sm" style="max-width: 150px;">
-					<option  th:text="#{items.status.ja}"></option>
+					<option value="">ステータス</option>
 				    <option th:each="status : ${statuses}" 
 				            th:value="${status.name}" 
 				            th:text="${status.name}"></option>
 				</select>
 				<!--カテゴリープルダウン-->
 				<select name="category" class="form-select form-select-sm" style="max-width: 150px;">
-					<option th:text="#{items.category.ja}"></option>
+					<option value="">カテゴリー</option>
 				    <option th:each="category : ${categories}" 
 				            th:value="${category.name}" 
 				            th:text="${category.name}"></option>
