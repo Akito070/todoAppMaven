@@ -22,17 +22,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer userId; 
+    private Integer userId;
     // 氏名
     @Column(name = "name")
-    private String name; 
-    // ユーザ名
+    private String name;
+    // ユーザー名
     @Column(name = "username")
-    private String userName; 
+    private String userName;
     // ハッシュ化されたパスワード
     @Column(name = "password")
-    private String password; 
+    private String password;
     // 作成日時
     @Column(name = "created_at")
-    private LocalDateTime createdAt; 
+    private LocalDateTime createdAt;
 }

@@ -9,17 +9,19 @@ import com.jp.todo.app.maven.repository.StatusRepository;
 
 @Service
 public class StatusService {
-	
+
 	private final StatusRepository statusRepository;
-	
-	StatusService(StatusRepository statusRepository){
+
+	StatusService(StatusRepository statusRepository) {
 		this.statusRepository = statusRepository;
 	}
 
-	/*
-	 *  ステータス情報の全件を取得する
+	/**
+	 * ステータス情報の全件を取得する。
+	 * 
+	 * @return ステータス情報の全件を返す。
 	 */
-	public List<StatusDto> getAllStatuses(){
+	public List<StatusDto> getAllStatuses() {
 		return statusRepository.findAllStatuses();
 	}
 }
