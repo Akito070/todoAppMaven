@@ -1,4 +1,4 @@
-package com.jp.todo_app_maven;
+package com.jp.todo.app.maven;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

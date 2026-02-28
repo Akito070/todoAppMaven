@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.jp</groupId>
-	<artifactId>todo-app-maven</artifactId>
+	<artifactId>todo.app.maven</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todo-app-maven</name>
+	<name>todo.app.maven</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
