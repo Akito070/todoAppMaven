@@ -19,34 +19,34 @@ import lombok.Data;
 @Data
 @Table(name = "todos")
 public class Todo {
-	
+
     // TODOリストID（主キー）
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-	private Integer id; 
+    private Integer id;
     // ユーザーID（外部キー）
     @Column(name = "user_id")
-	private Integer userId; 
+    private Integer userId;
     // タイトル
     @Column(name = "title")
-	private String title; 
+    private String title;
     // 詳細
     @Column(name = "description")
-    private String description; 
+    private String description;
     // ステータス（外部キー）
     @ManyToOne
     @JoinColumn(name = "status_id")
-    private Status status; 
+    private Status status;
     // カテゴリー（外部キー）
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category; 
+    private Category category;
     // 作成日時
     @Column(name = "created_at")
-    private LocalDateTime createdAt; 
+    private LocalDateTime createdAt;
     // 更新日時
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt; 
+    private LocalDateTime updatedAt;
 
 }

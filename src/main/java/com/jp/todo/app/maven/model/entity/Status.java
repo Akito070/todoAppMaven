@@ -13,15 +13,15 @@ import lombok.Data;
 @Data
 @Table(name = "statuses")
 public class Status {
-	
+
     // ステータスID（主キー）
     @Id
     @Column(name = "id")
-	private Integer id; 
+    private Integer id;
     // ステータス名
     @Column(name = "name")
-	private String name; 
+    private String name;
     // 表示順
     @Column(name = "sort_order")
-	private Integer sortOrder; 
+    private Integer sortOrder;
 }

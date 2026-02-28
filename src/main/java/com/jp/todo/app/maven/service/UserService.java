@@ -18,10 +18,11 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    
+
     /**
-     * ユーザ情報設定
-     * @param form ユーザ情報入力
+     * ユーザー情報を設定する。
+     * 
+     * @param form ユーザー登録フォーム
      */
     public void registerUser(RegisterForm form) {
         User user = new User();
