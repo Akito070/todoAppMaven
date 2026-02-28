@@ -45,7 +45,7 @@ public class TodoService {
 	}
 
 	/**
-	 * ToDoリストを検索する。
+	 * TODOリストを検索する。
 	 * 
 	 * @param title    検索対象のタイトル（部分一致）
 	 * @param status   ステータス名（完全一致）
@@ -98,7 +98,7 @@ public class TodoService {
 		todo.setTitle(form.getTitle());
 		todo.setDescription(form.getDescription());
 
-		// カテゴリをIDで取得し、Todoに設定（存在しない場合は例外）
+		// カテゴリをIDで取得し、TODOに設定（存在しない場合は例外）
 		Category category = categoryRepository.findById(form.getCategoryId())
 				.orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
 		todo.setCategory(category);
@@ -126,5 +126,67 @@ public class TodoService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		// 認証されたユーザー名を返す
 		return authentication.getName();
+	}
+
+	/**
+	 * 指定IDのTODO情報を取得する。
+	 * 
+	 * @param id TODOのID
+	 * @return 指定されたIDに該当するTODOエンティティ（存在しない場合は例外）
+	 */
+	public Todo getTodoId(Integer id) {
+		return todoRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid todo ID"));
+	}
+
+	/**
+	 * TODO更新処理
+	 * 
+	 * @param form 画面から送られたTODO登録用フォーム
+	 * @return 登録されたTODOエンティティ
+	 */
+	public Todo todoUpdate(TodoForm form) {
+
+		// TODO情報を取得
+		Todo todo = getTodoId(form.getId());
+		// フォームの値を設定
+		todo.setTitle(form.getTitle());
+		todo.setDescription(form.getDescription());
+
+		// カテゴリをIDで取得し、TODOに設定（存在しない場合は例外）
+		Category category = categoryRepository.findById(form.getCategoryId())
+				.orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
+		todo.setCategory(category);
+
+		// 登録・更新日時を現在時刻で設定
+		LocalDateTime now = LocalDateTime.now();
+		todo.setUpdatedAt(now);
+
+		// データベースに保存し、保存後のエンティティを返却
+		return todoRepository.save(todo);
+	}
+
+	/**
+	 * ToDoのステータスを1つ先に進める（未処理 → 処理中 → 処理済）
+	 *
+	 * @param todo 対象のTODOエンティティ
+	 */
+	public void upStatus(Todo todo) {
+
+		// 現在のステータスの並び順を取得
+		int currentSortOrder = todo.getStatus().getSortOrder();
+
+		// 次のステータスを sortOrder で取得
+		Status nextStatus = statusRepository.findBySortOrder(currentSortOrder + 1)
+				.orElseThrow(() -> new IllegalArgumentException("次のステータスが存在しません"));
+
+		// ステータスを更新
+		todo.setStatus(nextStatus);
+
+		// 更新日時を現在時刻で設定
+		todo.setUpdatedAt(LocalDateTime.now());
+
+		// DBに保存
+		todoRepository.save(todo);
 	}
 }
