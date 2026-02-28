@@ -9,17 +9,19 @@ import com.jp.todo.app.maven.model.dto.CategoryDto;
 import com.jp.todo.app.maven.model.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-	
-	// カテゴリー情報の全件を取得
+
+	/**
+	 * カテゴリー情報の全件を取得する。
+	 */
 	@Query("""
-		SELECT new com.jp.todo.app.maven.model.dto.CategoryDto(
-			c.id,
-			c.name,
-			c.sortOrder
-		)
-		FROM Category c
-		ORDER BY c.sortOrder ASC
-		""")
+			SELECT new com.jp.todo.app.maven.model.dto.CategoryDto(
+				c.id,
+				c.name,
+				c.sortOrder
+			)
+			FROM Category c
+			ORDER BY c.sortOrder ASC
+			""")
 	List<CategoryDto> findAllCategories();
 
 }

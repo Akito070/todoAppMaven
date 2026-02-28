@@ -61,6 +61,7 @@
 			            <div class="todo-description" th:text="${todo.description}"></div>
 			        </td>
 			        <td>
+						<!--ステータス-->
 						<span th:switch="${todo.statusName}">
 						    <span th:case="'未処理'" class="status-badge bg-secondary text-white" th:text="${todo.statusName}"></span>
 						    <span th:case="'処理中'" class="status-badge bg-primary text-white" th:text="${todo.statusName}"></span>
@@ -71,6 +72,7 @@
 						</span>
 			        </td>
 			        <td>
+						<!--カテゴリー-->
 						<span th:switch="${todo.categoryName}">
 						    <span th:case="'マーケティング'" class="category-badge bg-primary text-white" th:text="${todo.categoryName}"></span>
 						    <span th:case="'商品登録'" class="category-badge bg-secondary text-white" th:text="${todo.categoryName}"></span>
@@ -84,14 +86,17 @@
 						
 			        </td>
 					<td class="action-buttons d-flex justify-content-start gap-1">
+						<!--ステータス更新-->
 					    <form th:action="@{/todo/toggleStatus/{id}(id=${todo.id})}" method="post" th:object="${todo}" style="display: inline;">
 					        <button type="submit" class="btn btn-outline-dark btn-sm">
 					            <i class="fas" th:classappend="${todo.statusName != '処理済'} ? 'fa-check-circle' : 'fa-undo'"></i>
 					        </button>
 					    </form>
+						<!--編集ボタン-->
 						<a th:href="@{/todo/edit/{id}(id=${todo.id})}" class="btn btn-primary btn-sm">
 						   <i class="fas fa-pen"></i> 
 						</a>
+						<!--削除ボタン-->
 					    <form th:action="@{/todo/delete/{id}(id=${todo.id})}" method="post" style="display: inline;">
 					        <button type="submit" class="btn btn-danger btn-sm">
 					            <i class="fas fa-trash"></i>

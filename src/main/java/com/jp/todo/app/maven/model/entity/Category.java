@@ -14,15 +14,15 @@ import lombok.Data;
 @Table(name = "categories")
 public class Category {
 
-	// カテゴリーID（主キー）
+    // カテゴリーID（主キー）
     @Id
     @Column(name = "id")
-	private Integer id; 
+    private Integer id;
     // カテゴリー名
     @Column(name = "name")
-	private String name;
-     // 表示順
+    private String name;
+    // 表示順
     @Column(name = "sort_order")
-	private Integer sortOrder;
+    private Integer sortOrder;
 
 }

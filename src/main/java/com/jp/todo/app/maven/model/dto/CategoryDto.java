@@ -5,10 +5,10 @@ package com.jp.todo.app.maven.model.dto;
  */
 public record CategoryDto(
 
-    // カテゴリーID
-    Integer id,
-    // カテゴリー名
-    String name,
-    // 表示順
-    Integer sortOrder
-) {}
+                // カテゴリーID（主キー）
+                Integer id,
+                // カテゴリー名
+                String name,
+                // 表示順
+                Integer sortOrder) {
+}
